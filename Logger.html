@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function process() {
+            console.log("Process is working");
+        }
+
+        function order() {
+            console.log("Order is working");
+        }
+
+        function logger(fn) { // higher order function
+            return function(...args) {
+                console.log(fn.name, 'started ', new Date());
+                let ret = fn (...args);
+                console.log(fn.name, ' ended ', new Date());
+                return ret;
+            }
+        }
+
+        process = logger(process);
+        process();
+
+        order = logger(order);
+        order();
+
+    </script>
+</body>
+</html>

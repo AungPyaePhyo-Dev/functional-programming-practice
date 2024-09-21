@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // pure function ဖြစ်ဖို့ဆို
+        // 1. side effect မပါရဘူး
+        // 2. same input, same output ဖြစ်ရမယ်
+
+         // Advantages
+        // Memorization
+        // Self Documenting ( တခြား function ကိုကြည့်စရာမလို )
+        // Testing ( input တူတော့ test လုပ်ရလွယ် )
+
+
+        // purefunction => same input, sam output
+        // add(1,5) = 5
+        // looks like math function
+
+        // side effect
+        // impure function
+        let i = 0;
+        function getCounter() {
+            return i++;
+        }
+
+        // impure function
+        function process(order) {
+            order.something = 'something';
+        }
+
+        // pure function
+        function add(x,y) {
+            return x + y;
+        }
+
+        // impure function
+        function getData() {
+            return Math.random() * 10; // random() ကတခါထုတ်တိုင်းမှာ အပြောင်းအလဲရှိလို့
+        }
+
+        // impure function
+        function getDate() {
+            return new Date();
+        }
+
+        // impure to pure ပြောင်းရေး
+        function log(logger, message) {
+            logger('Message' , message);
+        }
+        log(console.log, 'Hello');
+
+        
+
+
+    </script>
+</body>
+</html>
