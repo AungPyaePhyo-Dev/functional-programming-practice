@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       function factorial(n)
+       {
+            console.log("Computed Factorial ", n);
+            let result = 1;
+            for(let i = 1; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+       } 
+
+       /*
+            cache[4] = 24
+       */
+       function memonize(fn) {
+            let cache = {};
+            return function(n) {
+                if(cache[n]) {
+                    return cache[n];
+                }else {
+                    cache[n] = fn(n);
+                    return cache[n];
+                }
+            }
+       }
+
+       const memonizeFcatorial = memonize(factorial);
+
+       console.log("Factorial 4", memonizeFcatorial(4));
+       console.log("Factorial 4", memonizeFcatorial(4));
+    </script>
+</body>
+</html>

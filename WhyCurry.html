@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // composition rule
+        // 1. single input single output 
+        // 2. type match
+
+        function pipe(...fns) { // funA, funB, funC
+            return function(x)
+            {
+                return fns.reduce((input,fn) => fn(input), x);
+            }
+        }
+
+        // function add(x,y) { // composition rule နဲ့ မကိုက်ညီ ၊ input နှစ်ခုထည့်လို့
+        //     return x + y; // x + undefined => NaN
+        // }
+
+        function add(x) { // composition rule နဲ့ မကိုက်ညီ ၊ input နှစ်ခုထည့်လို့
+            return function(y)
+            {
+                return x + y; 
+            }
+        }
+
+        const inc = (x) => x + 1; // 3 + 1 = 4
+        const double = (x) => x * 2;
+        const divBy2 = (x) => x / 2;   // 
+
+
+
+        const fun = pipe(add(3), divBy2, inc, double); // left to right works 3 + 3, 3/2, 3/2 + 1, (3/2+1) - 
+        console.log("Fun ", fun(3)); // 7/2  => 3.5 
+
+    </script>
+</body>
+</html>

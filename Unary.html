@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,3,4,5];
+        console.log("ParseInt 100,2", parseInt('100', 2)); // binary => decimal 4 ရ
+        console.log("ParseInt 100,16", parseInt('100', 16)); // hexa => decimal 256 ရ
+
+        // unary => input အများကြီးလက်ခံတဲ့ကောင်ကို တစ်ခုထဲလက်ခံအောင်လုပ်
+
+        function unary(fn) {
+            return function(...args) {
+                return fn(args[0]);
+            }
+        }
+
+        let result = arr.map(unary(parseInt));
+        console.log("result ", result);
+    </script>
+</body>
+</html>
