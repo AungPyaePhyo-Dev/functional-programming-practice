@@ -11,6 +11,9 @@
         // 1. single input single output 
         // 2. type match
 
+        // currying
+        // multiple input
+
         function pipe(...fns) { // funA, funB, funC
             return function(x)
             {
@@ -22,7 +25,7 @@
         //     return x + y; // x + undefined => NaN
         // }
 
-        function add(x) { // composition rule နဲ့ မကိုက်ညီ ၊ input နှစ်ခုထည့်လို့
+        function add(x) { // currying
             return function(y)
             {
                 return x + y; 
