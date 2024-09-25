@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // functional programming မှာ update လုပ်မရ
+        // clone လုပ်ပြီး return ပြန်
+        // fp မှာ getter setter အစား Ramda => R.prop('city')(obj) ( getter ) , R.assoc('city', 'somewhere', obj)  သုံး
+
+
+        // normal
+
+        function updateCity(obj,city) {
+            obj.city = city;
+        }
+
+        // function programming / မူရင်းဟာကိုပြင်လို့မရ
+
+        function updateCityFP(obj,city) {
+            return {
+                ...obj,
+                city
+            }
+        }
+
+        let obj = {
+            name : "AP",
+            city : "Yangon"
+        }
+
+        let obj2 = updateCityFP(obj, "Another");
+        console.log("Obj ", obj, " Obj2 ", obj2);
+
+
+    </script>
+</body>
+</html>
