@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>    
+
+        const MayBe = value => ({
+                value,
+                // valueOf: () => value,
+                map(fn) {
+                    return this.isNothing()? MayBe.of(null) : MayBe.of(fn(value));
+                },
+                isNothing: () => value === undefined || value === null, 
+                // orElse(defaultValue) {
+                //     return this.isNothing()?defaultValue:this;
+                // }
+        });
+
+        MayBe.of = MayBe;
+
+        let employees = {
+            1 : {
+                name : "Emp 1"
+            },
+            2 : {
+                name : "Emp 2",
+                supervisor : 1
+            },
+            3 : {
+                name : "Emp 3",
+                supervisor : 2
+            }
+        }
+
+        // if တွေသုံးနေရတာက problem 
+
+        function getSupervisorName(empId) {
+            let emp = employees[empId]; 
+            if(emp) {
+                let supervisorId = emp.supervisor;
+                if(supervisorId) 
+                {
+                    let supervisor = employees[supervisorId];
+                    if(supervisor) {
+                        return supervisor.name;
+                    }
+                }
+            }
+        }
+
+        console.log("Supervisor for Emp 1", getSupervisorName(1));
+        console.log("Supervisor for Emp 3", getSupervisorName(3));
+
+        // if အစား map နဲ့ ရေးတော့ ဖတ်ရတာရှင်း
+        function getSupervisorNameV2(empId) {
+            return MayBe.of(empId) // empId ရှိလား အရင်စစ်
+                        .map(empId=>employees[empId]) // empId ရ
+                        .map(employee=>employee.supervisor) 
+                        .map(supervisorId=>employees[supervisorId])
+                        .map(supervisor=>supervisor.name);
+        }
+
+        console.log("Supervisor for Emp 1", getSupervisorNameV2(1));
+        console.log("Supervisor for Emp 3", getSupervisorNameV2(3));
+
+    </script>
+</body>
+</html>

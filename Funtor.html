@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const bd = 1359 % 7;
+        console.log("Modulus ", bd);
+        let arr = ['apple', 'orange', 'banana'];
+        let arr2 = arr.map(item => item.toUpperCase());
+        console.log("Arr ", arr, " arr2 ", arr2);
+
+        const Container = value => ({
+            value, 
+            valueOf: () => value,
+            map: (fn) => Container(fn(value)),
+        });
+
+        Container.of = Container;
+
+        const double = (x) => x * 2;
+        const inc = (x) => x  + 1;
+
+        let one = Container.of(1);
+        let result = one.map(inc)
+                        .map(double);
+
+        console.log("One ", one.valueOf());
+        console.log("Result ", result.valueOf());
+
+        // law1
+        console.log("one ", one.map(R.identity).valueOf() == 1);
+
+        // law2
+        const newFun = R.pipe(inc, double);
+        result = one.map(newFun);
+        console.log("Result ", result.valueOf());
+    </script>
+</body>
+</html>
